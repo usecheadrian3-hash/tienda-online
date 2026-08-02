@@ -1,0 +1,152 @@
+/* ============================================================
+   EXTRAS — Utilidades y componentes complementarios
+   ============================================================ */
+
+/* ---- Eyebrow de sección ---- */
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-3);
+}
+
+/* ---- Precio (componente Price) ---- */
+.price {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.price-sm .price-now { font-size: .95rem; }
+.price-md .price-now { font-size: 1.1rem; }
+.price-lg .price-now { font-size: 1.6rem; }
+.price-xl .price-now { font-size: 2rem; }
+.price-now {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--ink);
+}
+.price-was {
+  font-size: .9em;
+  color: var(--gray-400);
+  text-decoration: line-through;
+}
+.price-off {
+  background: var(--accent);
+  color: #fff;
+  padding: 3px 9px;
+  border-radius: 99px;
+  font-size: .72rem;
+  font-weight: 700;
+}
+
+/* ---- Rating (componente Rating) ---- */
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--warning);
+}
+.rating .rating-half {
+  position: relative;
+  display: inline-flex;
+}
+.rating .rating-half-bg { opacity: .25; position: absolute; inset: 0; }
+.rating .rating-half svg:last-child { position: relative; }
+.rating .rating-empty { color: var(--gray-300); }
+.rating strong { margin-left: 6px; font-size: .85rem; color: var(--ink); }
+.rating small { margin-left: 4px; font-size: .78rem; color: var(--gray-500); }
+
+/* ---- Loader full pantalla ---- */
+.full-loader {
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  color: var(--gray-500);
+  font-size: .9rem;
+}
+
+/* ---- Icono de empty state ---- */
+.empty-state-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--space-4);
+  border-radius: 50%;
+  background: var(--gray-100);
+  display: grid;
+  place-items: center;
+  color: var(--gray-400);
+}
+
+/* ---- Badges adicionales ---- */
+.badge-accent { background: var(--accent); color: #fff; }
+.badge-dark { background: var(--ink); color: #fff; }
+
+/* ---- Navbar escritorio / móvil ---- */
+.desktop-nav { display: flex; }
+.mobile-menu-btn { display: none; }
+
+/* ---- Dropdown de cuenta (navbar) ---- */
+.account-drop { width: 210px; }
+.account-drop .nav-drop-item { width: 100%; text-align: left; }
+
+/* ---- Mantener mini carrito abierto por clase (touch) ---- */
+.cart-hover.cart-hover-open .mini-cart,
+.cart-hover:focus-within .mini-cart,
+.cart-hover:hover .mini-cart {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* ---- Filtros móviles ---- */
+.mobile-only { display: none; }
+.filter-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+}
+.filter-panel-head strong { font-size: .9rem; }
+
+/* ---- Placeholder de imagen de producto ---- */
+.pc-media-placeholder {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 40%, var(--gray-200), var(--gray-100) 70%);
+}
+
+/* ---- Botón cerrar sesión en menú móvil ---- */
+.menu-logout {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 13px 0;
+  font-size: .95rem;
+  color: var(--danger);
+  font-weight: 600;
+  border-top: 1px solid var(--gray-100);
+  margin-top: 8px;
+}
+
+/* ---- Logo mark reutilizable ---- */
+.logo-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--ink);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
