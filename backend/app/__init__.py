@@ -45,6 +45,21 @@ def create_app(config_class=Config):
     def server_error(_):
         return jsonify({"ok": False, "message": "Error interno del servidor"}), 500
 
+    _frontend_dist = os.path.abspath(
+        os.path.join(os.path.dirname(os.path.dirname(__file__)), "..", "frontend", "dist")
+    )
+
+    if os.path.isfile(os.path.join(_frontend_dist, "index.html")):
+        @app.get("/", defaults={"path": ""})
+        @app.get("/<path:path>")
+        def spa_fallback(path):
+            if path.startswith("api/"):
+                return jsonify({"ok": False, "message": "Recurso no encontrado"}), 404
+            full = os.path.join(_frontend_dist, path)
+            if path and os.path.isfile(full):
+                return send_from_directory(_frontend_dist, path)
+            return send_from_directory(_frontend_dist, "index.html")
+
     with app.app_context():
         try:
             db.create_all()

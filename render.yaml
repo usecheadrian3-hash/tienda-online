@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: tienda-online
+    runtime: python
+    plan: free
+    buildCommand: bash build.sh
+    startCommand: gunicorn run:app --chdir backend --bind 0.0.0.0:$PORT --workers 1
+    healthCheckPath: /api/health
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: FLASK_ENV
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: DB_DRIVER
+        value: sqlite
+      - key: PAYMENT_PROVIDER
+        value: test
