@@ -53,6 +53,34 @@ PRODUCT_IMG_KEYWORDS = {
     "banda-deportiva-pulse-flex": "fitness-band",
 }
 
+# Imágenes personalizadas del catálogo (carpeta backend/uploads/products).
+# Si un producto no aparece acá, usa loremflickr (keyword de arriba).
+PRODUCT_IMAGES = {
+    "smartwatch-pulse-5": ["/uploads/products/smartwatch.png"],
+    "zapatillas-urbanas-halen-run": ["/uploads/products/zapatillas-urbanas.png"],
+    "botella-termica-noma-750ml": ["/uploads/products/botella-termica.png"],
+    "perfume-vela-essence-100ml": ["/uploads/products/perfume.png"],
+    "chaqueta-aurora-bomber": ["/uploads/products/chaqueta.png"],
+    "lampara-solstice-glow": ["/uploads/products/lampara.png"],
+    "teclado-mecanico-cero-75": ["/uploads/products/teclado.png"],
+    "kit-yoga-terra-4mm": ["/uploads/products/kit-yoga.png"],
+    "mochila-urbana-cero-24l": ["/uploads/products/mochila.png"],
+    "serum-vitamina-c-vela": ["/uploads/products/serum.png"],
+    "altavoz-bluetooth-pulse-mini": ["/uploads/products/altavoz.png"],
+    "camiseta-oversize-halen": ["/uploads/products/camiseta.png"],
+    "gafas-de-sol-aurora-1960": ["/uploads/products/gafas.png"],
+    "set-vela-aroma-home": ["/uploads/products/set-velas.png"],
+    "reloj-minimalista-noma": ["/uploads/products/reloj.png"],
+    "cafetera-de-prensa-terra-1l": ["/uploads/products/cafetera.png"],
+    "mancuernas-ajustables-pulse-24kg": ["/uploads/products/mancuernas.png"],
+    "mouse-ergonomico-cero": ["/uploads/products/mouse.png"],
+    "kit-skincare-vela-4-pasos": ["/uploads/products/kit-skincare.png"],
+    "alfombra-de-yoga-terra-pro": ["/uploads/products/alfombra-yoga.png"],
+    "zapatillas-aurora-court": ["/uploads/products/zapatillas-aurora.png"],
+    "difusor-aroma-solstice": ["/uploads/products/difusor.png"],
+    "banda-deportiva-pulse-flex": ["/uploads/products/banda-deportiva.png"],
+}
+
 CATEGORY_IMG_KEYWORDS = {
     "moda": "fashion",
     "electronica": "electronics",
@@ -320,11 +348,13 @@ def main():
             db.session.add(product)
             db.session.flush()
 
-            images = [
+            images = PRODUCT_IMAGES.get(slug) or [
                 (IMG(PRODUCT_IMG_KEYWORDS.get(slug, "product"), seeds_used * 10 + 1), True, 0),
                 (IMG(PRODUCT_IMG_KEYWORDS.get(slug, "product"), seeds_used * 10 + 2), False, 1),
                 (IMG(PRODUCT_IMG_KEYWORDS.get(slug, "product"), seeds_used * 10 + 3), False, 2),
             ]
+            if isinstance(images[0], str):
+                images = [(u, i == 0, i) for i, u in enumerate(images)]
             for i, (url, primary, pos) in enumerate(images):
                 db.session.add(ProductImage(product_id=product.id, url=url,
                                             alt=name, position=pos, is_primary=primary))
